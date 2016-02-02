@@ -1,4 +1,4 @@
-"For Vundle
+" for Vundle
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -8,14 +8,13 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 
 
 """""""""""
@@ -80,7 +79,7 @@ Plugin 'majutsushi/tagbar'
 
 "Coffeescript tabbar
 " install gem install CoffeeTags
-Plugin 'lukaszkorecki/CoffeeTags'
+"Plugin 'lukaszkorecki/CoffeeTags'
 
 "File Insert
 Plugin 'rking/ag.vim'
@@ -92,6 +91,9 @@ Plugin 'scrooloose/nerdtree'
 """"""""""""""""""
 " Misc Things... "
 """"""""""""""""""
+
+" Vim Shell
+Plugin 'Shougo/vimshell.vim'
 
 "plugin from http://vim-scripts.org/vim/scripts.html
 Plugin 'L9'
@@ -112,39 +114,50 @@ Plugin 'user/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
+
 filetype plugin indent on    " required
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
-"
+
 " Brief help
 " :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginInstall    - installs plugins; append `!` to update or just
+" :PluginUpdate
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
+" :PluginClean      - confirms removal of unused plugins; append `!` to
+" auto-approve removal
+
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" To ssh to server 
-" vim scp://qnew//home/ubuntu/quorum-ty2/ 
 
 
 "Colors
 syntax enable
 "colorscheme monokai
-
-"Solarized background
 set background=dark
-set t_Co=256  " For Solarized
-let g:solarized_termcolors=16  " For solarized
+
+"set t_Co=256
+let g:solarized_termcolors=16
 colorscheme solarized
 
-
+"if !has('gui_running')
+    "" Compatibility for Terminal
+    "let g:solarized_termtrans=1
+   
+    "if (&t_Co >= 256 || $TERM == 'xterm-256color')
+       "" Do nothing, it handles itself.
+    "else
+        "" Make Solarized use 16 colors for Terminal support
+        "let g:solarized_termcolors=256
+    "endif
+"endif
 
 "Spaces and Tabs
 set tabstop=4 		" number of visual spaces per TAB
 set softtabstop=4  	" number of spaces in tab when editing
-set shiftwidth=4
+set shiftwidth=4    " number of 
 set expandtab       	" tabs are spaces (tab button = spaces)
 
 "UI cofigs
@@ -156,7 +169,7 @@ set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch 		" show matching ()
 
-"Search
+" Search
 
 set incsearch           " search as characters are entered
 set hlsearch            " highlight matches
@@ -167,34 +180,55 @@ set hlsearch            " highlight matches
 "either run a new one or manually stop highlighting the old 
 "search with :nohlsearch. I find myself running this all
 " the time so I've mapped it to ,<space>.
-
-nnoremap <leader><space> :nohlsearch<CR>
-nmap <F6> :TagbarToggle<CR>
-
-"merlin
-let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-execute "set rtp+=" . g:opamshare . "/merlin/vim"
-
-
-"execute ":source " . "/Users/tyrocca/.opam/system/share/vim/syntax/ocp-indent.vim"
-
-"installing ocp indent for ocaml
-"set rtp+=</Users/tyrocca/.vim/ocp-indent-vim>
 "
-au BufEnter *.ml setf ocaml
-au BufEnter *.mli setf ocaml
-au FileType ocaml call FT_ocaml()
-function FT_ocaml()
-    set textwidth=80
-    set colorcolumn=80
-    set shiftwidth=2
-    set tabstop=2
-    " ocp-indent with ocp-indent-vim
-    let opamshare=system("opam config var share | tr -d '\n'")
-    execute "autocmd FileType ocaml source".opamshare."/vim/syntax/ocp-indent.vim"
-    filetype indent on
-    filetype plugin indent on
-endfunction
+nnoremap <leader><space> :nohlsearch<CR>i
 
-set rtp+=</Users/tyrocca/.vim/ocp-indent-vim>
+""""""""""""""""
+" Key Mappings "
+""""""""""""""""
+
+"Paste toggle
+set pastetoggle=<F2>
+
+" Buffers 
+nnoremap <F3> :bp<CR>  " Go back
+nnoremap <F4> :bn<CR>  " Go forward
+nnoremap <F5> :buffers<CR>:buffer<Space>  " Show Buffer Menu (select number)
+nmap <F6> :TagbarToggle<CR>  " Toggles Tag Browser
+
+" f7 will strip out whitespace
+nnoremap <silent> <F7> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+" for syntastic use f8
+let g:syntastic_mode_map = { 'mode': 'passive' }
+nmap <F8> :SyntasticCheck<CR>  " Toggles Syntax check
+
+" Make f12 and \s also equal save
+noremap <Leader>s :update<CR>
+noremap <F12> :update<CR>
+
+
+" make spaces = '/' for ctrl p
+let g:ctrlp_abbrev = {
+    \ 'gmode': 't',
+    \ 'abbrevs': [
+        \ {
+        \ 'pattern': ' ',
+        \ 'expanded': '/',
+        \ 'mode': 'pfrz',
+        \ },
+        \ ]
+    \ }
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\.git$|log\|tmp$\|cc$',
+  \ 'file': '\.pyc$'
+  \ }
+
+
+set laststatus=2
+
+"Ignore Errors
+let g:syntastic_python_checkers = ["flake8"]
+let g:syntastic_python_flake8_args = '--max-line-length=100'
 
