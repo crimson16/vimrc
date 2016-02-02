@@ -191,10 +191,13 @@ nnoremap <leader><space> :nohlsearch<CR>i
 set pastetoggle=<F2>
 
 " Buffers 
-nnoremap <F3> :bp<CR>  " Go back
-nnoremap <F4> :bn<CR>  " Go forward
-nnoremap <F5> :buffers<CR>:buffer<Space>  " Show Buffer Menu (select number)
-nmap <F6> :TagbarToggle<CR>  " Toggles Tag Browser
+" go fwd, back and list buffers 
+nnoremap <F3> :bp<CR>
+nnoremap <F4> :bn<CR>
+nnoremap <F5> :buffers<CR>
+
+" Togggle tagbar
+nmap <F6> :TagbarToggle<CR>
 
 " f7 will strip out whitespace
 nnoremap <silent> <F7> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
