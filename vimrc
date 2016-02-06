@@ -195,24 +195,40 @@ set pastetoggle=<F2>
 " go fwd, back and list buffers 
 nnoremap <F3> :bp<CR>
 nnoremap <F4> :bn<CR>
-nnoremap <F5> :buffers<CR>
+nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Togggle tagbar
 nmap <F6> :TagbarToggle<CR>
 
-" f7 will strip out whitespace
-nnoremap <silent> <F7> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-
-" for syntastic use f8
-let g:syntastic_mode_map = { 'mode': 'passive' }
-nmap <F8> :SyntasticCheck<CR>  " Toggles Syntax check
-
-" Make f12 and \s also equal save
+" Make f10 and \s also equal save
 noremap <Leader>s :update<CR>
-noremap <F12> :update<CR>
+noremap <F10> :update<CR>
+
+" f11 will strip out whitespace
+nnoremap <silent> <F11> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+" for syntastic use f12
+let g:syntastic_mode_map = { 'mode': 'passive' }
+nmap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
 
-" make spaces = '/' for ctrl p
+"""""""""""""""""""""""""""
+" Modifications for CTRLP "
+"""""""""""""""""""""""""""
+
+"https://robots.thoughtbot.com/faster-grepping-in-vim
+"Silver Searcher
+if executable('ag')
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    let g:ctrlp_use_caching = 0
+endif
+
 let g:ctrlp_abbrev = {
     \ 'gmode': 't',
     \ 'abbrevs': [
