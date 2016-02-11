@@ -70,13 +70,13 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'ervandew/supertab'
 
 " plugin to control p
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Tagbar
 " You need to install exuberant c tags
 "     brew install ctags (mac)
 "     sudo apt-get install exuberant-ctags (ubuntu)
-Plugin 'majutsushi/tagbar'
+"Plugin 'majutsushi/tagbar'
 
 "Coffeescript tabbar
 " install gem install CoffeeTags
@@ -200,12 +200,11 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 " Togggle tagbar
 nmap <F6> :TagbarToggle<CR>
 
-" Make f10 and \s also equal save
+" Make \s also equal save
 noremap <Leader>s :update<CR>
-noremap <F10> :update<CR>
 
-" f11 will strip out whitespace
-nnoremap <silent> <F11> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+" f10 will strip out whitespace
+nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " for syntastic use f12
 let g:syntastic_mode_map = { 'mode': 'passive' }
@@ -240,14 +239,24 @@ let g:ctrlp_abbrev = {
         \ ]
     \ }
 
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\.git$|log\|tmp$\|cc$',
-  \ 'file': '\.pyc$'
-  \ }
+"let g:ctrlp_custom_ignore = {
+  "\ 'dir':  '\.git$|log\|tmp$\|cc\|quorum-ty/amazon',
+  "\ 'file': '\.pyc$'
+  "\ }
+if exists("g:ctrl_user_command")
+    unlet g:ctrlp_user_command
+endif
+set wildignore+=*/tmp/*,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
+
 
 set laststatus=2
 
 "Ignore Errors
 let g:syntastic_python_checkers = ["flake8"]
-
 let g:syntastic_python_flake8_args = '--max-line-length=100'
+
+"Fugitive settings
+set diffopt+=vertical
+
+"Tagbar Ignore
+autocmd BufNewFile,BufReadPost app/userdata/models.py let b:tagbar_ignore = 1 
