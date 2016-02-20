@@ -170,6 +170,17 @@ set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch 		" show matching ()
 
+"UX config
+
+"Enable delete if local
+let g:remoteSession = ($USER == "ubuntu")
+if g:remoteSession
+    let g:nothing = 'nothing'
+else
+    set backspace=2
+endif
+
+
 " Search
 
 set incsearch           " search as characters are entered
@@ -239,16 +250,16 @@ let g:ctrlp_abbrev = {
         \ ]
     \ }
 
-"let g:ctrlp_custom_ignore = {
-  "\ 'dir':  '\.git$|log\|tmp$\|cc\|quorum-ty/amazon',
-  "\ 'file': '\.pyc$'
-  "\ }
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\vamazon',
+  \ 'file': '\.pyc$'
+  \ }
 if exists("g:ctrl_user_command")
     unlet g:ctrlp_user_command
 endif
-set wildignore+=*/tmp/*,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
+set wildignore+=*/tmp/*,*/amazon/**,*/cc/*,*.so,*.swp,*.zip,*.pyc
 
-
+"For Airline
 set laststatus=2
 
 "Ignore Errors
