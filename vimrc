@@ -195,6 +195,19 @@ set hlsearch            " highlight matches
 "
 nnoremap <leader><space> :nohlsearch<CR>i
 
+"Smarter searching
+":set smartcase
+"/copyright      " Case insensitive
+"/Copyright      " Case sensitive
+"/copyright\C    " Case sensitive
+"/Copyright\c    " Case insensitive
+
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
 """"""""""""""""
 " Key Mappings "
 """"""""""""""""
@@ -210,6 +223,9 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Togggle tagbar
 nmap <F6> :TagbarToggle<CR>
+
+" Toggle foldmethod on
+nnoremap <F7> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 
 " Make \s also equal save
 noremap <Leader>s :update<CR>
@@ -264,7 +280,7 @@ set laststatus=2
 
 "Ignore Errors
 let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_python_flake8_args = '--max-line-length=100'
+let g:syntastic_python_flake8_args = '--max-line-length=100 --ignore=W391'
 
 "Fugitive settings
 set diffopt+=vertical
