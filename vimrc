@@ -170,6 +170,13 @@ set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch 		" show matching ()
 
+"Searching
+"set smartcase
+"/copyright      " Case insensitive
+"/Copyright      " Case sensitive
+"/copyright\C    " Case sensitive
+"/Copyright\c    " Case insensitive
+
 "UX config
 
 "Enable delete if local
@@ -224,8 +231,13 @@ nnoremap <F5> :buffers<CR>:buffer<Space>
 " Togggle tagbar
 nmap <F6> :TagbarToggle<CR>
 
+" Indent 
+nmap <F7> :IndentLinesToggle<CR>
+" Disabled by default
+let g:indentLine_enabled = 0  
+
 " Toggle foldmethod on
-nnoremap <F7> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
+nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 
 " Make \s also equal save
 noremap <Leader>s :update<CR>
