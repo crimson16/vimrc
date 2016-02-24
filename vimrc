@@ -235,6 +235,9 @@ nmap <F6> :TagbarToggle<CR>
 nmap <F7> :IndentLinesToggle<CR>
 " Disabled by default
 let g:indentLine_enabled = 0  
+" Thing to speed up vim
+let g:indentLine_faster = 1
+
 
 " Toggle foldmethod on
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
