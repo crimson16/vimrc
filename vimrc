@@ -24,6 +24,9 @@ Plugin 'VundleVim/Vundle.vim'
 " Solarized
 Plugin 'altercation/vim-colors-solarized'
 
+" Mod8 (spacegray)
+Plugin 'easysid/mod8.vim'
+
 " Indent guide
 Plugin 'Yggdroot/indentLine'
 
