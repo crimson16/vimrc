@@ -27,6 +27,9 @@ Plugin 'altercation/vim-colors-solarized'
 " Mod8 (spacegray)
 Plugin 'easysid/mod8.vim'
 
+" Molokai
+Plugin 'tomasr/molokai'
+
 " Indent guide
 Plugin 'Yggdroot/indentLine'
 
