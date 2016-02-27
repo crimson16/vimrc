@@ -235,10 +235,10 @@ nnoremap <F4> :bn<CR>
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Togggle tagbar
-nmap <F6> :TagbarToggle<CR>
+nnoremap <F6> :TagbarToggle<CR>
 
 " Indent 
-nmap <F7> :IndentLinesToggle<CR>
+nnoremap <F7> :IndentLinesToggle<CR>
 " Disabled by default
 let g:indentLine_enabled = 0  
 " Thing to speed up vim
@@ -249,16 +249,16 @@ let g:indentLine_faster = 1
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 
 " Make \s also equal save
-noremap <Leader>s :update<CR>
+nnoremap <Leader>s :update<CR>
 
 " f10 will strip out whitespace
 nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " for syntastic use f12
 let g:syntastic_mode_map = { 'mode': 'passive' }
-nmap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
+nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
-
+nnoremap <c-l> :tabnew asdf.txt<CR>
 """""""""""""""""""""""""""
 " Modifications for CTRLP "
 """""""""""""""""""""""""""
@@ -288,13 +288,13 @@ let g:ctrlp_abbrev = {
     \ }
 
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\vamazon',
+  \ 'dir':  'amazon',
   \ 'file': '\.pyc$'
   \ }
 if exists("g:ctrl_user_command")
     unlet g:ctrlp_user_command
 endif
-set wildignore+=*/tmp/*,*/amazon/**,*/cc/*,*.so,*.swp,*.zip,*.pyc
+set wildignore+=*/tmp/*,*/amazon/**,"**/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
 
 "For Airline
 set laststatus=2
