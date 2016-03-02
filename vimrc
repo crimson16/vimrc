@@ -44,6 +44,11 @@ Plugin 'wavded/vim-stylus'
 " Editing "
 """""""""""
 
+" Edit indent block
+" ai – the current indentation level and the line above
+" ii – the current indentation level excluding the line above
+Plugin 'michaeljsmith/vim-indent-object'
+
 " Commentout
 Plugin 'scrooloose/nerdcommenter'
 
