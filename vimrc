@@ -56,7 +56,6 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'vim-scripts/FuzzyFinder'
 
 " LightLine
-"Plugin 'itchyny/lightline.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
@@ -72,13 +71,23 @@ Plugin 'scrooloose/syntastic'
 " Git tools
 Plugin 'tpope/vim-fugitive'
 
+"server auto complete < no dependent files
+Plugin 'ervandew/supertab'
+
+" Plugin YouComplete me
+" Needs dependent files
+" sudo apt-get install build-essential cmake
+"Plugin 'Valloric/YouCompleteMe'
+
+" Snipmate - edit and add in ~/.vim/snippets/<language>.snippet
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
 
 """"""""""""""""""""
 " Navigation Tools "
 """"""""""""""""""""
-
-"server auto complete
-Plugin 'ervandew/supertab'
 
 " plugin to control p
 Plugin 'ctrlpvim/ctrlp.vim'
@@ -234,24 +243,24 @@ set foldlevel=1         "this is just what i use
 set pastetoggle=<F2>
 
 " Buffers 
-" go fwd, back and list buffers 
-nnoremap <F3> :bp<CR>
-nnoremap <F4> :bn<CR>
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Togggle tagbar
-nnoremap <F6> :TagbarToggle<CR>
+"nnoremap <F6> :TagbarToggle<CR>
 
 " Indent 
 nnoremap <F7> :IndentLinesToggle<CR>
+
 " Disabled by default
 let g:indentLine_enabled = 0  
 " Thing to speed up vim
 let g:indentLine_faster = 1
 
-
 " Toggle foldmethod on
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
+
+" for inserting new lines
+nnoremap <silent> <leader><CR> i<CR><ESC>
 
 " Make \s also equal save
 nnoremap <Leader>s :update<CR>
@@ -263,6 +272,8 @@ nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 let g:syntastic_mode_map = { 'mode': 'passive' }
 nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
+" My custom scratch file-  used for notes and for launching common files
+" quickly
 nnoremap <c-l> :tabnew asdf.txt<CR>
 """""""""""""""""""""""""""
 " Modifications for CTRLP "
