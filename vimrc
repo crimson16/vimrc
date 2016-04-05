@@ -80,9 +80,9 @@ Plugin 'ervandew/supertab'
 "Plugin 'Valloric/YouCompleteMe'
 
 " Snipmate - edit and add in ~/.vim/snippets/<language>.snippet
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
 
 
 """"""""""""""""""""
@@ -239,6 +239,9 @@ set foldlevel=1         "this is just what i use
 " Key Mappings "
 """"""""""""""""
 
+" I don't like <C-w> in insert mode so i remapped it
+inoremap <silent> <C-w> <ESC><C-w>
+
 "Paste toggle
 set pastetoggle=<F2>
 
@@ -274,7 +277,12 @@ nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
 " My custom scratch file-  used for notes and for launching common files
 " quickly
-nnoremap <c-l> :tabnew asdf.txt<CR>
+nnoremap <silent> <c-l> :tabnew asdf.txt<CR>
+nnoremap <silent> <c-k> :vsp asdf.txt<CR>
+
+" For toggling between tabs
+nnoremap <silent> <S-right> :tabn<CR>
+nnoremap <silent> <S-left> :tabp<CR>
 """""""""""""""""""""""""""
 " Modifications for CTRLP "
 """""""""""""""""""""""""""

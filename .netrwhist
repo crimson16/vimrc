@@ -1,10 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =8
-let g:netrw_dirhist_1='scp://qnew/quorum-ty/'
-let g:netrw_dirhist_2='scp://qnew/quorum-ty/app/'
-let g:netrw_dirhist_3='scp://qnew/quorum-ty/app/static/'
-let g:netrw_dirhist_4='scp://qnew/quorum-ty/app/static/coffee/'
-let g:netrw_dirhist_5='scp://qnew/quorum-ty/'
-let g:netrw_dirhist_6='scp://qnew/quorum-ty/app/'
-let g:netrw_dirhist_7='scp://qnew/quorum-ty/app/management/'
-let g:netrw_dirhist_8='scp://qnew/quorum-ty/app/management/parser/'
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/ubuntu/quorum-api/ansible/plays/roles/find_ec2_image'
+let g:netrw_dirhist_2='/home/ubuntu/quorum-api/ansible/plays/roles/find_ec2_image/common'
+let g:netrw_dirhist_3='/home/ubuntu/quorum-api/ansible/plays/roles/find_ec2_image/common/tasks'
