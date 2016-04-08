@@ -245,6 +245,9 @@ inoremap <silent> <C-w> <ESC><C-w>
 "Paste toggle
 set pastetoggle=<F2>
 
+" Reselecting Pasted text
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 " Buffers 
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
@@ -262,7 +265,7 @@ let g:indentLine_faster = 1
 " Toggle foldmethod on
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 
-" for inserting new lines
+" for inserting new lines (like <C-o>)
 nnoremap <silent> <leader><CR> i<CR><ESC>
 
 " Make \s also equal save
