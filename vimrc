@@ -241,6 +241,8 @@ set foldlevel=1         "this is just what i use
 
 " I don't like <C-w> in insert mode so i remapped it
 inoremap <silent> <C-w> <ESC><C-w>
+"inoremap <C-e> <Esc>A
+"inoremap <C-a> <Esc>^i
 
 "Paste toggle
 set pastetoggle=<F2>
