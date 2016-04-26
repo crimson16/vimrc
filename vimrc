@@ -242,7 +242,7 @@ set foldlevel=1         "this is just what i use
 " I don't like <C-w> in insert mode so i remapped it
 inoremap <silent> <C-w> <ESC><C-w>
 "inoremap <C-e> <Esc>A
-"inoremap <C-a> <Esc>^i
+"inoremap <C-a> <Esc>I
 
 "Paste toggle
 set pastetoggle=<F2>
@@ -277,7 +277,7 @@ nnoremap <Leader>s :update<CR>
 nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " for syntastic use f12
-let g:syntastic_mode_map = { 'mode': 'passive' }
+"let g:syntastic_mode_map = { 'mode': 'passive' }
 nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
 " My custom scratch file-  used for notes and for launching common files
@@ -291,6 +291,10 @@ nnoremap <silent> <S-left> :tabp<CR>
 """""""""""""""""""""""""""
 " Modifications for CTRLP "
 """""""""""""""""""""""""""
+
+"Accessing mru mode
+nnoremap <silent> <leader>m :CtrlPMRU<CR>
+nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
 "https://robots.thoughtbot.com/faster-grepping-in-vim
 "Silver Searcher
@@ -316,14 +320,14 @@ let g:ctrlp_abbrev = {
         \ ]
     \ }
 
+set wildignore+=*/tmp/*,app/amazon/,*/amazon/**,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  'amazon',
+  \ 'dir':  '\vapp\/amazon',
   \ 'file': '\.pyc$'
   \ }
 if exists("g:ctrl_user_command")
     unlet g:ctrlp_user_command
 endif
-set wildignore+=*/tmp/*,*/amazon/**,"**/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
 
 "For Airline
 set laststatus=2
