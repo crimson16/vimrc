@@ -30,6 +30,9 @@ Plugin 'easysid/mod8.vim'
 " Molokai
 Plugin 'tomasr/molokai'
 
+" Monokai
+Plugin 'sickill/vim-monokai'
+
 " Indent guide
 Plugin 'Yggdroot/indentLine'
 
@@ -160,16 +163,20 @@ filetype plugin indent on    " required
 "Colors
 syntax enable
 "colorscheme monokai
-set background=dark
+if ($USER == "ty" || $USER == "tyrocca")
 
-"set t_Co=256
-let g:solarized_termcolors=16
-colorscheme solarized
+    "set t_Co=256
+    set background=dark
+    let g:solarized_termcolors=16
+    colorscheme solarized
+else
+    colorscheme monokai
+endif
 
 "if !has('gui_running')
     "" Compatibility for Terminal
     "let g:solarized_termtrans=1
-   
+
     "if (&t_Co >= 256 || $TERM == 'xterm-256color')
        "" Do nothing, it handles itself.
     "else
@@ -181,7 +188,7 @@ colorscheme solarized
 "Spaces and Tabs
 set tabstop=4 		" number of visual spaces per TAB
 set softtabstop=4  	" number of spaces in tab when editing
-set shiftwidth=4    " number of 
+set shiftwidth=4    " number of
 set expandtab       	" tabs are spaces (tab button = spaces)
 set colorcolumn=100      " keep within this column
 
@@ -224,7 +231,7 @@ set hlsearch            " highlight matches
 " turn off search highlight
 
 "Vim will keep highlighted matches from searches until you
-"either run a new one or manually stop highlighting the old 
+"either run a new one or manually stop highlighting the old
 "search with :nohlsearch. I find myself running this all
 " the time so I've mapped it to ,<space>.
 "
@@ -258,17 +265,17 @@ set pastetoggle=<F2>
 " Reselecting Pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
-" Buffers 
+" Buffers
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Togggle tagbar
 "nnoremap <F6> :TagbarToggle<CR>
 
-" Indent 
+" Indent
 nnoremap <F7> :IndentLinesToggle<CR>
 
 " Disabled by default
-let g:indentLine_enabled = 0  
+let g:indentLine_enabled = 0
 " Thing to speed up vim
 let g:indentLine_faster = 1
 
@@ -295,7 +302,7 @@ nnoremap <silent> <S-left> :tabp<CR>
 " Leader Key Mappings "
 """""""""""""""""""""""
 " Make space also be leader
-map <space> <leader>
+"map <space> <leader>
 
 " jump to last file
 nnoremap <Leader><Leader> :e #<CR>
