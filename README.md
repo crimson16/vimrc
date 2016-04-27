@@ -4,9 +4,13 @@
 Once your vim configuration is under version control, it’s quite straightforward to import your settings to any machine that has git installed. If you followed the instructions above to put your vimrc and plugins in a dotvim directory, then you can follow these steps to synchronise them to another machine:
 ```
 cd ~
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+rm -rf ~/.vim
+rm ~/.vimrc
 git clone http://github.com/crimson16/vimrc.git ~/.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ln -s ~/.vim/vimrc ~/.vimrc
+
+if gvim
 ln -s ~/.vim/gvimrc ~/.gvimrc
 
 ```
