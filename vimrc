@@ -114,6 +114,7 @@ Plugin 'scrooloose/nerdtree'
 """"""""""""""""""
 
 " Vim Shell
+Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
 
 "plugin from http://vim-scripts.org/vim/scripts.html
@@ -152,7 +153,9 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-
+""""""""""""""""""""
+" Built in Toggles "
+""""""""""""""""""""
 
 "Colors
 syntax enable
@@ -180,6 +183,7 @@ set tabstop=4 		" number of visual spaces per TAB
 set softtabstop=4  	" number of spaces in tab when editing
 set shiftwidth=4    " number of 
 set expandtab       	" tabs are spaces (tab button = spaces)
+set colorcolumn=100      " keep within this column
 
 "UI cofigs
 set number 		" show line nums
@@ -189,6 +193,10 @@ filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch 		" show matching ()
+
+" http://usevim.com/2012/10/19/vim101-set-hidden/
+set hidden
+set history=100
 
 "Searching
 "set smartcase
@@ -267,12 +275,6 @@ let g:indentLine_faster = 1
 " Toggle foldmethod on
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 
-" for inserting new lines (like <C-o>)
-nnoremap <silent> <leader><CR> i<CR><ESC>
-
-" Make \s also equal save
-nnoremap <Leader>s :update<CR>
-
 " f10 will strip out whitespace
 nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
@@ -288,38 +290,48 @@ nnoremap <silent> <c-k> :vsp asdf.txt<CR>
 " For toggling between tabs
 nnoremap <silent> <S-right> :tabn<CR>
 nnoremap <silent> <S-left> :tabp<CR>
+
+"""""""""""""""""""""""
+" Leader Key Mappings "
+"""""""""""""""""""""""
+" Make space also be leader
+map <space> <leader>
+
+" jump to last file
+nnoremap <Leader><Leader> :e #<CR>
+
+" for inserting new lines (like <C-o>)
+nnoremap <silent> <leader><CR> i<CR><ESC>
+
+" Make \s also equal save
+nnoremap <Leader>s :update<CR>
+
+"""""""""""""""
+" Plugin Mods "
+"""""""""""""""
+" Below are modifications of the default apps
+
 """""""""""""""""""""""""""
 " Modifications for CTRLP "
 """""""""""""""""""""""""""
-
 "Accessing mru mode
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
 "https://robots.thoughtbot.com/faster-grepping-in-vim
 "Silver Searcher
-if executable('ag')
-    " Use ag over grep
-    set grepprg=ag\ --nogroup\ --nocolor
+"if executable('ag')
+    "" Use ag over grep
+    "set grepprg=ag\ --nogroup\ --nocolor
 
-    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+    "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
 
-    " ag is fast enough that CtrlP doesn't need to cache
-    let g:ctrlp_use_caching = 0
-endif
+    "" ag is fast enough that CtrlP doesn't need to cache
+    "let g:ctrlp_use_caching = 0
+"endif
 
-let g:ctrlp_abbrev = {
-    \ 'gmode': 't',
-    \ 'abbrevs': [
-        \ {
-        \ 'pattern': ' ',
-        \ 'expanded': '/',
-        \ 'mode': 'pfrz',
-        \ },
-        \ ]
-    \ }
-
+" Ignored files
 set wildignore+=*/tmp/*,app/amazon/,*/amazon/**,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\vapp\/amazon',
@@ -329,9 +341,15 @@ if exists("g:ctrl_user_command")
     unlet g:ctrlp_user_command
 endif
 
+"""""""""""
+" Airline "
+"""""""""""
 "For Airline
 set laststatus=2
 
+"""""""""""""
+" Syntastic "
+"""""""""""""
 "Ignore Errors
 let g:syntastic_python_checkers = ["flake8"]
 let g:syntastic_python_flake8_args = '--max-line-length=100 --ignore=W391'
@@ -339,5 +357,22 @@ let g:syntastic_python_flake8_args = '--max-line-length=100 --ignore=W391'
 "Fugitive settings
 set diffopt+=vertical
 
-"Tagbar Ignore
-autocmd BufNewFile,BufReadPost app/userdata/models.py let b:tagbar_ignore = 1 
+"""""""""""""
+" Nerd Tree "
+"""""""""""""
+let NERDTreeMapActivateNode='<right>'
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>j :NERDTreeFind<CR>
+
+
+"""""""""""""""""
+" Auto Commands "
+"""""""""""""""""
+" auto cmd to strip whitespace
+autocmd BufWritePre * :%s/\s\+$//e
+
+"""""""""""
+" Credits "
+"""""""""""
+" inspiration
+" http://marcgg.com/blog/2016/03/01/vimrc-example/
