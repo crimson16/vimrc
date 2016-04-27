@@ -5,10 +5,11 @@ Once your vim configuration is under version control, it’s quite straightforwa
 ```
 cd ~
 rm -rf ~/.vim
-rm ~/.vimrc
 git clone http://github.com/crimson16/vimrc.git ~/.vim
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+rm ~/.vimrc
 ln -s ~/.vim/vimrc ~/.vimrc
+vim +PluginInstall +qall
 
 if gvim
 ln -s ~/.vim/gvimrc ~/.gvimrc
