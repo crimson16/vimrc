@@ -340,9 +340,9 @@ nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 "endif
 
 " Ignored files
-set wildignore+=*/tmp/*,app/amazon/,*/amazon/**,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc
+set wildignore+=*/tmp/*,app/amazon/,*/amazon/**,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc,*/.git
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\vapp\/amazon',
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
   \ 'file': '\.pyc$'
   \ }
 if exists("g:ctrl_user_command")
