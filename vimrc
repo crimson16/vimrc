@@ -323,6 +323,7 @@ nnoremap <Leader>s :update<CR>
 """""""""""""""""""""""""""
 "Accessing mru mode
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
+nnoremap <silent> <C-m> :CtrlPMRU<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 
 "https://robots.thoughtbot.com/faster-grepping-in-vim
@@ -377,6 +378,9 @@ nnoremap <leader>j :NERDTreeFind<CR>
 """""""""""""""""
 " auto cmd to strip whitespace
 autocmd BufWritePre * :%s/\s\+$//e
+if len(argv()) == 0
+    autocmd VimEnter * CtrlPMRU
+endif
 
 """""""""""
 " Credits "
