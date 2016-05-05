@@ -39,6 +39,9 @@ Plugin 'Yggdroot/indentLine'
 " CoffeeScript
 Plugin 'kchmck/vim-coffee-script'
 
+" CJSX
+Plugin 'mtscout6/vim-cjsx'
+
 " Stylus
 Plugin 'wavded/vim-stylus'
 
@@ -74,8 +77,11 @@ Plugin 'scrooloose/syntastic'
 " Git tools
 Plugin 'tpope/vim-fugitive'
 
-"server auto complete < no dependent files
+" server auto complete < no dependent files
 Plugin 'ervandew/supertab'
+
+" Multiple cursors
+Plugin 'terryma/vim-multiple-cursors'
 
 " Plugin YouComplete me
 " Needs dependent files
@@ -94,6 +100,9 @@ Plugin 'ervandew/supertab'
 
 " plugin to control p
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" Plugin for navigating
+Plugin 'easymotion/vim-easymotion'
 
 " Tagbar
 " You need to install exuberant c tags
@@ -286,7 +295,7 @@ nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " for syntastic use f12
-"let g:syntastic_mode_map = { 'mode': 'passive' }
+let g:syntastic_mode_map = { 'mode': 'passive' }
 nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
 " My custom scratch file-  used for notes and for launching common files
@@ -302,16 +311,16 @@ nnoremap <silent> <S-left> :tabp<CR>
 " Leader Key Mappings "
 """""""""""""""""""""""
 " Make space also be leader
-"map <space> <leader>
+"map , <Leader>
 
 " jump to last file
-nnoremap <Leader><Leader> :e #<CR>
+"nnoremap <Leader><Leader> :e #<CR>
 
 " for inserting new lines (like <C-o>)
 nnoremap <silent> <leader><CR> i<CR><ESC>
 
 " Make \s also equal save
-nnoremap <Leader>s :update<CR>
+"nnoremap <Leader>s :update<CR>
 
 """""""""""""""
 " Plugin Mods "
@@ -372,12 +381,44 @@ let NERDTreeMapActivateNode='<right>'
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>j :NERDTreeFind<CR>
 
+"""""""""""""""
+" Easy Motion "
+"""""""""""""""
+"let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
 
 """""""""""""""""
 " Auto Commands "
 """""""""""""""""
 " auto cmd to strip whitespace
-autocmd BufWritePre * :%s/\s\+$//e
+"autocmd BufWritePre * :%s/\s\+$//e
+function! <SID>StripTrailingWhitespaces()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
+autocmd BufWritePre *.py,*.js,*.coffee :call <SID>StripTrailingWhitespaces()
+
 if len(argv()) == 0
     autocmd VimEnter * CtrlPMRU
 endif
