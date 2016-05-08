@@ -102,7 +102,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " Plugin for navigating
-Plugin 'easymotion/vim-easymotion'
+"Plugin 'easymotion/vim-easymotion'
 
 " Tagbar
 " You need to install exuberant c tags
@@ -300,8 +300,8 @@ nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
 " My custom scratch file-  used for notes and for launching common files
 " quickly
-nnoremap <silent> <c-l> :tabnew asdf.txt<CR>
-nnoremap <silent> <c-k> :vsp asdf.txt<CR>
+"nnoremap <silent> <Leader>l :tabnew asdf.txt<CR>
+"nnoremap <silent> <Leader>k :vsp asdf.txt<CR>
 
 " For toggling between tabs
 nnoremap <silent> <S-right> :tabn<CR>
@@ -334,29 +334,33 @@ nnoremap <silent> <leader><CR> i<CR><ESC>
 nnoremap <silent> <leader>m :CtrlPMRU<CR>
 nnoremap <silent> <C-m> :CtrlPMRU<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
+nnoremap <silent> <C-l> :CtrlPBuffer<CR>
 
-"https://robots.thoughtbot.com/faster-grepping-in-vim
-"Silver Searcher
-"if executable('ag')
-    "" Use ag over grep
-    "set grepprg=ag\ --nogroup\ --nocolor
-
-    "" Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-    "let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-    "" ag is fast enough that CtrlP doesn't need to cache
-    "let g:ctrlp_use_caching = 0
-"endif
 
 " Ignored files
-set wildignore+=*/tmp/*,app/amazon/,*/amazon/**,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc,*/.git
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\.pyc$'
-  \ }
-if exists("g:ctrl_user_command")
-    unlet g:ctrlp_user_command
+"https://robots.thoughtbot.com/faster-grepping-in-vim
+"Silver Searcher
+if executable('ag')
+    " Use ag over grep
+    set grepprg=ag\ --nogroup\ --nocolor
+
+    " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g "" --ignore={"*/cc/*","*/js/*","*/css/*","*/templates/media/*","*/individual_projects/*","*/static/data/*"}'
+
+    " ag is fast enough that CtrlP doesn't need to cache
+    "let g:ctrlp_use_caching = 0
 endif
+
+"set wildignore+=*/tmp/*,app/amazon/,*/amazon/**,*/amazon/*,*/cc/*,*.so,*.swp,*.zip,*.pyc,*/.git
+"let g:ctrlp_custom_ignore = {
+  "\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  "\ 'file': '\.pyc$'
+  "\ }
+
+" WHAT DOES THIS DO?
+"if exists("g:ctrl_user_command")
+    "unlet g:ctrlp_user_command
+"endif
 
 """""""""""
 " Airline "
@@ -388,18 +392,18 @@ nnoremap <leader>j :NERDTreeFind<CR>
 
 " Jump to anywhere you want with minimal keystrokes, with just one key binding.
 " `s{char}{label}`
-nmap s <Plug>(easymotion-overwin-f)
+"nmap s <Plug>(easymotion-overwin-f)
 " or
 " `s{char}{char}{label}`
 " Need one more keystroke, but on average, it may be more comfortable.
-nmap s <Plug>(easymotion-overwin-f2)
+"nmap s <Plug>(easymotion-overwin-f2)
 
 " Turn on case insensitive feature
-let g:EasyMotion_smartcase = 1
+"let g:EasyMotion_smartcase = 1
 
 " JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
+"map <Leader>j <Plug>(easymotion-j)
+"map <Leader>k <Plug>(easymotion-k)
 
 """""""""""""""""
 " Auto Commands "
