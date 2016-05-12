@@ -69,7 +69,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 
 " server auto complete < no dependent files
-Plugin 'ervandew/supertab'
+"Plugin 'ervandew/supertab'
+
+" YOU complete me!
+Plugin 'Valloric/YouCompleteMe'
 
 " Surround
 Plugin 'tpope/vim-surround'
@@ -371,6 +374,15 @@ let g:syntastic_python_flake8_args = '--max-line-length=200 --ignore=W391'
 """""""""""""""""""""
 set diffopt+=vertical
 
+""""""""""""""""
+" Indent lines "
+""""""""""""""""
+" Disabled by default
+let g:indentLine_enabled = 0
+" Thing to speed up vim
+let g:indentLine_faster = 1
+
+nnoremap <F7> :IndentLinesToggle<CR>
 
 """""""""""""
 " Nerd Tree "
