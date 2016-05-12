@@ -24,6 +24,10 @@ Plugin 'VundleVim/Vundle.vim'
 " Solarized
 Plugin 'altercation/vim-colors-solarized'
 
+" LightLine
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 " Mod8 (spacegray)
 Plugin 'easysid/mod8.vim'
 
@@ -45,6 +49,9 @@ Plugin 'mtscout6/vim-cjsx'
 " Stylus
 Plugin 'wavded/vim-stylus'
 
+" For coding in vim
+"plugin from http://vim-scripts.org/vim/scripts.html
+Plugin 'L9'
 
 """""""""""
 " Editing "
@@ -58,12 +65,11 @@ Plugin 'michaeljsmith/vim-indent-object'
 " Commentout
 Plugin 'scrooloose/nerdcommenter'
 
-" Fuzzy finder
-Plugin 'vim-scripts/FuzzyFinder'
+" Syntax highighting
+Plugin 'scrooloose/syntastic'
 
-" LightLine
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
+" server auto complete < no dependent files
+Plugin 'ervandew/supertab'
 
 " Surround
 Plugin 'tpope/vim-surround'
@@ -71,17 +77,12 @@ Plugin 'tpope/vim-surround'
 " Emmet
 Plugin 'mattn/emmet-vim'
 
-" Syntax highighting
-Plugin 'scrooloose/syntastic'
-
-" Git tools
-Plugin 'tpope/vim-fugitive'
-
-" server auto complete < no dependent files
-Plugin 'ervandew/supertab'
-
 " Multiple cursors
 Plugin 'terryma/vim-multiple-cursors'
+
+" Fuzzy finder
+"Plugin 'vim-scripts/FuzzyFinder'
+
 
 """"""""""""""""""""
 " Navigation Tools "
@@ -111,25 +112,29 @@ Plugin 'scrooloose/nerdtree'
 " Misc Things... "
 """"""""""""""""""
 
+" Git tools
+Plugin 'tpope/vim-fugitive'
+
 " Vim Shell
 Plugin 'Shougo/vimproc.vim'
 Plugin 'Shougo/vimshell.vim'
 
-"plugin from http://vim-scripts.org/vim/scripts.html
-Plugin 'L9'
-
-" Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
+""""""""""""""""""""""
+"Useful vundle stuff "
+""""""""""""""""""""""
 
 " The sparkup vim script is in a subdirectory of this repo called vim.
 " Pass the path to set the runtimepath properly.
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
+" Git plugin not hosted on GitHub
+"Plugin 'git://git.wincent.com/command-t.git'
+
+" git repos on your local machine (i.e. when working on your own plugin)
+" Plugin 'file:///home/gmarik/path/to/plugin'
+
 " Avoid a name conflict with L9
-Plugin 'user/L9', {'name': 'newL9'}
+"Plugin 'user/L9', {'name': 'newL9'}
 
 
 " All of your Plugins must be added before the following line
@@ -210,12 +215,12 @@ set history=100
 "UX config
 
 "Enable delete if local
-let g:remoteSession = ($USER == "ubuntu")
-if g:remoteSession
-    let g:nothing = 'nothing'
-else
-    set backspace=2
-endif
+"let g:remoteSession = ($USER == "ubuntu")
+"if g:remoteSession
+    "let g:nothing = 'nothing'
+"else
+    "set backspace=2
+"endif
 
 
 " Search
@@ -245,6 +250,7 @@ set foldnestmax=10      "deepest fold is 10 levels
 set nofoldenable        "dont fold by default
 set foldlevel=1         "this is just what i use
 
+
 """"""""""""""""
 " Key Mappings "
 """"""""""""""""
@@ -253,6 +259,11 @@ set foldlevel=1         "this is just what i use
 inoremap <silent> <C-w> <ESC><C-w>
 "inoremap <C-e> <Esc>A
 "inoremap <C-a> <Esc>I
+
+
+"""""""""""""""""""""""
+" Copying and pasting "
+"""""""""""""""""""""""
 
 "Paste toggle
 set pastetoggle=<F2>
@@ -265,19 +276,16 @@ map "+p :r!xclip -o -sel clip
 " Reselecting Pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+
+"""""""""""""""""""""
+" Function Key Maps "
+"""""""""""""""""""""
+
 " Buffers
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
 " Togggle tagbar
 "nnoremap <F6> :TagbarToggle<CR>
-
-" Indent
-nnoremap <F7> :IndentLinesToggle<CR>
-
-" Disabled by default
-let g:indentLine_enabled = 0
-" Thing to speed up vim
-let g:indentLine_faster = 1
 
 " Toggle foldmethod on
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
@@ -285,33 +293,21 @@ nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 " f10 will strip out whitespace
 nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
-" for syntastic use f12
-let g:syntastic_mode_map = { 'mode': 'passive' }
-nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
-
-" For toggling between tabs
-nnoremap <silent> <S-right> :tabn<CR>
-nnoremap <silent> <S-left> :tabp<CR>
 
 """""""""""""""""""""""
 " Leader Key Mappings "
 """""""""""""""""""""""
+
 " Make space also be leader
 "map , <Leader>
-
-" jump to last file
-"nnoremap <Leader><Leader> :e #<CR>
 
 " for inserting new lines (like <C-o>)
 nnoremap <silent> <leader><CR> i<CR><ESC>
 
-" Make \s also equal save
-"nnoremap <Leader>s :update<CR>
 
 """""""""""""""
 " Plugin Mods "
 """""""""""""""
-" Below are modifications of the default apps
 
 """""""""""""""""""""""""""
 " Modifications for CTRLP "
@@ -353,17 +349,28 @@ endif
 "For Airline
 set laststatus=2
 
+
 """""""""""""
 " Syntastic "
 """""""""""""
+" for syntastic use f12
+let g:syntastic_mode_map = { 'mode': 'passive' }
+nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
+
+" For toggling between tabs
+nnoremap <silent> <S-right> :tabn<CR>
+nnoremap <silent> <S-left> :tabp<CR>
+
 "Ignore Errors
 let g:syntastic_python_checkers = ["flake8"]
 let g:syntastic_python_flake8_args = '--max-line-length=200 --ignore=W391'
+
 
 """""""""""""""""""""
 " Fugitive settings "
 """""""""""""""""""""
 set diffopt+=vertical
+
 
 """""""""""""
 " Nerd Tree "
@@ -371,6 +378,7 @@ set diffopt+=vertical
 let NERDTreeMapActivateNode='<right>'
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>j :NERDTreeFind<CR>
+
 
 """""""""""""""""
 " Auto Commands "
