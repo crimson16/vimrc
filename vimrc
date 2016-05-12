@@ -83,26 +83,12 @@ Plugin 'ervandew/supertab'
 " Multiple cursors
 Plugin 'terryma/vim-multiple-cursors'
 
-" Plugin YouComplete me
-" Needs dependent files
-" sudo apt-get install build-essential cmake
-"Plugin 'Valloric/YouCompleteMe'
-
-" Snipmate - edit and add in ~/.vim/snippets/<language>.snippet
-"Plugin 'MarcWeber/vim-addon-mw-utils'
-"Plugin 'tomtom/tlib_vim'
-"Plugin 'garbas/vim-snipmate'
-
-
 """"""""""""""""""""
 " Navigation Tools "
 """"""""""""""""""""
 
 " plugin to control p
 Plugin 'ctrlpvim/ctrlp.vim'
-
-" Plugin for navigating
-"Plugin 'easymotion/vim-easymotion'
 
 " Tagbar
 " You need to install exuberant c tags
@@ -271,6 +257,11 @@ inoremap <silent> <C-w> <ESC><C-w>
 "Paste toggle
 set pastetoggle=<F2>
 
+"Paste tools to personal clipboard
+set clipboard=unnamed
+vmap "+y :!xclip -f -sel clip
+map "+p :r!xclip -o -sel clip
+
 " Reselecting Pasted text
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
@@ -297,11 +288,6 @@ nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " for syntastic use f12
 let g:syntastic_mode_map = { 'mode': 'passive' }
 nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
-
-" My custom scratch file-  used for notes and for launching common files
-" quickly
-"nnoremap <silent> <Leader>l :tabnew asdf.txt<CR>
-"nnoremap <silent> <Leader>k :vsp asdf.txt<CR>
 
 " For toggling between tabs
 nnoremap <silent> <S-right> :tabn<CR>
@@ -335,7 +321,6 @@ nnoremap <silent> <leader>m :CtrlPMRU<CR>
 nnoremap <silent> <C-m> :CtrlPMRU<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
 nnoremap <silent> <C-l> :CtrlPBuffer<CR>
-
 
 " Ignored files
 "https://robots.thoughtbot.com/faster-grepping-in-vim
@@ -373,9 +358,11 @@ set laststatus=2
 """""""""""""
 "Ignore Errors
 let g:syntastic_python_checkers = ["flake8"]
-let g:syntastic_python_flake8_args = '--max-line-length=100 --ignore=W391'
+let g:syntastic_python_flake8_args = '--max-line-length=200 --ignore=W391'
 
-"Fugitive settings
+"""""""""""""""""""""
+" Fugitive settings "
+"""""""""""""""""""""
 set diffopt+=vertical
 
 """""""""""""
@@ -384,26 +371,6 @@ set diffopt+=vertical
 let NERDTreeMapActivateNode='<right>'
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>j :NERDTreeFind<CR>
-
-"""""""""""""""
-" Easy Motion "
-"""""""""""""""
-"let g:EasyMotion_do_mapping = 0 " Disable default mappings
-
-" Jump to anywhere you want with minimal keystrokes, with just one key binding.
-" `s{char}{label}`
-"nmap s <Plug>(easymotion-overwin-f)
-" or
-" `s{char}{char}{label}`
-" Need one more keystroke, but on average, it may be more comfortable.
-"nmap s <Plug>(easymotion-overwin-f2)
-
-" Turn on case insensitive feature
-"let g:EasyMotion_smartcase = 1
-
-" JK motions: Line motions
-"map <Leader>j <Plug>(easymotion-j)
-"map <Leader>k <Plug>(easymotion-k)
 
 """""""""""""""""
 " Auto Commands "
@@ -426,6 +393,17 @@ autocmd BufWritePre *.py,*.js,*.coffee :call <SID>StripTrailingWhitespaces()
 if len(argv()) == 0
     autocmd VimEnter * CtrlPMRU
 endif
+
+"""""""""""""""
+" Misc things "
+"""""""""""""""
+" prevents writing stupid files
+cabbrev w] w
+cabbrev w\ w
+cabbrev w' w
+
+" make write actually write
+command! W  write
 
 """""""""""
 " Credits "
