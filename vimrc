@@ -71,6 +71,9 @@ Plugin 'scrooloose/syntastic'
 " server auto complete < no dependent files
 Plugin 'ervandew/supertab'
 
+" jedi vim - make sure you pip jedi
+Plugin 'davidhalter/jedi-vim'
+
 " YOU complete me!
 "Plugin 'Valloric/YouCompleteMe'
 
