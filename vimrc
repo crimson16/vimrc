@@ -387,6 +387,12 @@ let g:indentLine_faster = 1
 
 nnoremap <F7> :IndentLinesToggle<CR>
 
+"""""""""""""""
+" Jedi Python "
+"""""""""""""""
+let g:jedi#use_tabs_not_buffers = 1
+let g:jedi#popup_select_first = 0
+
 """""""""""""
 " Nerd Tree "
 """""""""""""
