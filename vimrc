@@ -69,10 +69,10 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
 
 " server auto complete < no dependent files
-"Plugin 'ervandew/supertab'
+Plugin 'ervandew/supertab'
 
 " YOU complete me!
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 
 " Surround
 Plugin 'tpope/vim-surround'
