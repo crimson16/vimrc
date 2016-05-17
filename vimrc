@@ -28,6 +28,9 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 
+" Tmux line
+Plugin 'edkolev/tmuxline.vim'
+
 " Mod8 (spacegray)
 Plugin 'easysid/mod8.vim'
 
@@ -72,7 +75,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'ervandew/supertab'
 
 " jedi vim - make sure you pip jedi
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 
 " YOU complete me!
 "Plugin 'Valloric/YouCompleteMe'
@@ -96,6 +99,9 @@ Plugin 'terryma/vim-multiple-cursors'
 
 " plugin to control p
 Plugin 'ctrlpvim/ctrlp.vim'
+
+" tmux
+Plugin 'christoomey/vim-tmux-navigator'
 
 " Tagbar
 " You need to install exuberant c tags
@@ -171,7 +177,7 @@ syntax enable
 "colorscheme monokai
 if ($USER == "ty" || $USER == "tyrocca")
 
-    "set t_Co=256
+    set t_Co=256
     set background=dark
     let g:solarized_termcolors=16
     colorscheme solarized
@@ -263,9 +269,14 @@ set foldlevel=1         "this is just what i use
 
 " I don't like <C-w> in insert mode so i remapped it
 inoremap <silent> <C-w> <ESC><C-w>
+
+" Mods for screen
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
 "inoremap <C-e> <Esc>A
 "inoremap <C-a> <Esc>I
-
 
 """""""""""""""""""""""
 " Copying and pasting "
@@ -290,14 +301,14 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Buffers
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
-" Togggle tagbar
-"nnoremap <F6> :TagbarToggle<CR>
-
 " Toggle foldmethod on
 nnoremap <F8> :setlocal foldmethod=indent<CR>:setlocal foldignore= <CR>
 
+" Launch vimrc
+nnoremap <F9> :tabe ~/.vimrc<CR>
+
 " f10 will strip out whitespace
-nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+"nnoremap <silent> <F10> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 
 """""""""""""""""""""""
@@ -319,10 +330,12 @@ nnoremap <silent> <leader><CR> i<CR><ESC>
 " Modifications for CTRLP "
 """""""""""""""""""""""""""
 "Accessing mru mode
-nnoremap <silent> <leader>m :CtrlPMRU<CR>
-nnoremap <silent> <C-m> :CtrlPMRU<CR>
+nnoremap <silent> <leader>l :CtrlPMRU<CR>
+nnoremap <silent> <space>l :CtrlPMRU<CR>
+"nnoremap <silent> <C-l> :CtrlPMRU<CR>
 nnoremap <silent> <leader>b :CtrlPBuffer<CR>
-nnoremap <silent> <C-l> :CtrlPBuffer<CR>
+nnoremap <silent> <space>b :CtrlPBuffer<CR>
+"nnoremap <silent> <C-k> :CtrlPBuffer<CR>
 
 " Ignored files
 "https://robots.thoughtbot.com/faster-grepping-in-vim
@@ -355,12 +368,16 @@ endif
 "For Airline
 set laststatus=2
 
+"For Airline
+let g:tmuxline_powerline_separators = 0
+
 
 """""""""""""
 " Syntastic "
 """""""""""""
 " for syntastic use f12
 let g:syntastic_mode_map = { 'mode': 'passive' }
+nnoremap <F10> :SyntasticToggleMode<CR>
 nnoremap <F12> :update<CR>:SyntasticCheck<CR>  " Toggles Syntax check
 
 " For toggling between tabs
@@ -401,6 +418,18 @@ let NERDTreeMapActivateNode='<right>'
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>j :NERDTreeFind<CR>
 
+""""""""
+" TMUX "
+""""""""
+
+let g:tmux_navigator_no_mappings = 1
+let g:tmux_navigator_save_on_switch = 1  " Save on close
+
+nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
+nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 """""""""""""""""
 " Auto Commands "
