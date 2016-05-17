@@ -369,9 +369,7 @@ endif
 set laststatus=2
 
 "For Airline
-let g:tmuxline_powerline_separators = 0
-
-"
+let g:tmuxline_powerline_separators = 1
 let g:airline_powerline_fonts = 1
 
 
