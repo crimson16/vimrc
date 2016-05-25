@@ -202,6 +202,8 @@ filetype indent on      " load filetype-specific indent files
 set wildmenu            " visual autocomplete for command menu
 set lazyredraw          " redraw only when we need to.
 set showmatch 		" show matching ()
+set mouse=a
+set timeoutlen=1000 ttimeoutlen=0  " prevent slowdown
 
 " http://usevim.com/2012/10/19/vim101-set-hidden/
 set hidden
@@ -258,8 +260,8 @@ nnoremap <c-l> <c-w>l
 "inoremap <C-a> <Esc>I
 
 " For toggling between tabs
-nnoremap <silent> <S-right> :tabn<CR>
-nnoremap <silent> <S-left> :tabp<CR>
+"nnoremap <silent> <S-right> :tabn<CR>
+"nnoremap <silent> <S-left> :tabp<CR>
 
 """""""""""""""""""""""
 " Copying and pasting "
