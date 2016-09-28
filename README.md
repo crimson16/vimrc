@@ -1,4 +1,4 @@
-
+# DEPRECATED
 ### Installing your Vim environment on another machine
 
 Once your vim configuration is under version control, it’s quite straightforward to import your settings to any machine that has git installed. If you followed the instructions above to put your vimrc and plugins in a dotvim directory, then you can follow these steps to synchronise them to another machine:
